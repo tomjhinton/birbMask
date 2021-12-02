@@ -2,16 +2,12 @@ import './style.scss'
 import * as THREE from 'three'
 import {Pane} from 'tweakpane';
 
-import { gsap } from 'gsap'
-import * as tf from '@tensorflow/tfjs';
 import vertexShader from './shaders/vert.glsl'
 
 import fragmentShader1 from './shaders/frag1.glsl'
 
 
 import fragmentShader2 from './shaders/frag2.glsl'
-
-
 
 import fragmentShader from './shaders/frag.glsl'
 
@@ -23,15 +19,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 const canvas = document.querySelector('canvas.webgl')
 
 const scene = new THREE.Scene()
-const blazeface = require('@tensorflow-models/blazeface');
 
 import  * as faceFilter from './jeelizFaceFilter.module.js'
 
-import * as  JeelizThreeHelper from './JeelizThreeHelper.js'
-
 const neuralNetworkModel = require('./NN_DEFAULT.json')
-
-
 
 
 
@@ -41,8 +32,6 @@ const webcamCanvas = document.getElementById('webcamCanvas')
 
 let shaderArr = [fragmentShader, fragmentShader1, fragmentShader2]
 let selected = 0
-
-
 
 
 let scaleMutiply = 2.3
@@ -62,10 +51,10 @@ function setupWebcam() {
             resolve()
 
 
-           faceFilter.init({
-             canvasId: 'webcamCanvas',
-             NNC: neuralNetworkModel, // instead of NNCPath
-             callbackReady: function(errCode, spec){
+            faceFilter.init({
+              canvasId: 'webcamCanvas',
+              NNC: neuralNetworkModel, // instead of NNCPath
+              callbackReady: function(errCode, spec){
                 if (errCode){
                   console.log('AN ERROR HAPPENS. ERR =', errCode);
                   return;
@@ -75,7 +64,6 @@ function setupWebcam() {
 
               },
               callbackTrack: function(detectState){
-                // console.log(detectState)
                 maskM.position.x = detectState.x
                 maskM.position.y = detectState.y
 
@@ -85,11 +73,11 @@ function setupWebcam() {
 
                 maskM.scale.set(  detectState.s * scaleMutiply,  detectState.s * scaleMutiply,  detectState.s * scaleMutiply)
 
-    // Render your scene here
-    // [... do something with detectState]
-  } //end callbackTrack
-             // ... other init parameters
-           });
+              // Render your scene here
+              // [... do something with detectState]
+              } //end callbackTrack
+              // ... other init parameters
+            })
           } , false)
         },
         error => reject())
@@ -100,11 +88,6 @@ function setupWebcam() {
 }
 
 setupWebcam()
-
-// const threeStuffs = JeelizThreeHelper.init({canvasId: 'webcamElement',
-// NNC: neuralNetworkModel});
-// //
-// const THREECAMERA = JeelizThreeHelper.create_camera();
 
 
 
@@ -132,8 +115,7 @@ const maskMaterial  = new THREE.ShaderMaterial({
 function change(){
   if(selected < shaderArr.length-1){
     selected ++
-  }
-  else if(selected === shaderArr.length-1){
+  } else if(selected === shaderArr.length-1){
     selected ++
 
     // mask = sceneGroup
@@ -141,15 +123,11 @@ function change(){
     scene.add(sceneGroup)
     maskM = sceneGroup
     scaleMutiply = 4.6
-  }
-  else{
+  } else{
     selected = 0
-
-    // mask = sceneGroup
     scene.remove(sceneGroup)
-
     maskM = mask
-      scene.add(maskM)
+    scene.add(maskM)
     scaleMutiply = 2.6
   }
   maskMaterial.needsUpdate = true
@@ -199,16 +177,8 @@ window.addEventListener('resize', () =>{
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-// camera.position.x = 10
-// camera.position.y = 7
 camera.position.z = 15
 scene.add(camera)
-
-// Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
-// controls.maxPolarAngle = Math.PI / 2 - 0.1
-
 
 /**
  * Renderer
@@ -224,17 +194,14 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor( 0x000000, 0. )
 const mouse = new THREE.Vector2()
 
-// const geometry =  new THREE.PlaneGeometry( 6, 9, 128, 128)
 
-var geometry = new THREE.SphereGeometry(4, 64, 64, 0, 3, );
+var geometry = new THREE.SphereGeometry(4, 64, 64, 0, 3, )
 
 
 let mask = new THREE.Mesh(geometry, maskMaterial)
 
 let maskM = mask
 
-
-// mask.rotation.z +=1
 scene.add(maskM)
 
 const light = new THREE.AmbientLight( 0x404040 ) // soft white light
@@ -246,24 +213,17 @@ scene.add( directionalLight )
 
 const gtlfLoader = new GLTFLoader()
 
-
-// console.log(riverMaterial)
 let sceneGroup
 
 
 gtlfLoader.load(
   'duck.glb',
   (gltf) => {
-    console.log(gltf)
 
-    // gltf.scene.scale.set(4.5,4.5,4.5)
+
     sceneGroup = gltf.scene
     sceneGroup.needsUpdate = true
     sceneGroup.position.y = 2
-    // scene.add(sceneGroup)
-    // mask = sceneGroup
-
-
 
 
   }
@@ -314,8 +274,6 @@ const inputD = pane.addInput(
 inputD.on('change', function(ev) {
   maskMaterial.uniforms.uD.value = ev.value
 })
-
-
 
 
 const clock = new THREE.Clock()
@@ -370,13 +328,13 @@ function draw() {
   const c = new Array(100).fill().map((_,i) => `rgb(${pal(
     ((i + t) / 100) * (Math.PI * 2),
     settings[0], settings[1], settings[2], settings[3]
-  ).map(e => e * 255).join(',')})`).join(',');
+  ).map(e => e * 255).join(',')})`).map((rgb,i) => `${rgb} ${i/100 * 100}% ${(i+1)/100 * 100}%`).join(',');
   document.getElementById('body').style.background = `linear-gradient(${c})`;
 
   const d = new Array(30 ).fill().map((_,i) => `rgb(${pal(
     ((i + t) / 100) * (Math.PI * 2),
     settings[1], settings[0], settings[3], settings[2]
-  ).map(e => e * 255).join(',')})`).join(',');
+  ).map(e => e * 255).join(',')})`).map((rgb,i) => `${rgb} ${i/30 * 100}% ${(i+1)/30 * 100}%`).join(',');
 
   document.getElementById('webcam').style.background = `linear-gradient(${d})`;
 

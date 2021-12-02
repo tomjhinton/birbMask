@@ -44,13 +44,14 @@
   position: absolute;
   color: rgba(255,255,255,1);
   // pointer-events: none;
-  top: 14%;
+  top: 16%;
   left: 3%;
   // justify-content: center;
   height: 20px;
   z-index: 1;
   cursor: pointer;
   animation: pulse 2s infinite;
+  // filter: drop-shadow(0 0 0.75rem black);
 
 
 }
@@ -61,7 +62,7 @@
   position: absolute;
   color: rgba(255,255,255,1);
   // pointer-events: none;
-  top: 14%;
+  top: 16%;
   left: 85%;
   // justify-content: center;
 
@@ -69,15 +70,22 @@
   z-index: 1;
   cursor: pointer;
   animation: pulse 2s infinite;
+  // filter: drop-shadow(0 0 0.75rem black);
 
 
 }
 
 
 .tp-dfwv{
+  font-family: Art;
   margin-top: auto;
   top: 50%;
   animation: pulse 2s infinite;
+}
+
+.tp-lblv_l{
+  font-size: 2em;
+  font-family: Art;
 }
 
 @keyframes pulse {

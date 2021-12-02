@@ -42,11 +42,11 @@ const webcamElement = document.getElementById('webcam')
 const webcamCanvas = document.getElementById('webcamCanvas')
 
 let shaderArr = [fragmentShader, fragmentShader1, fragmentShader2]
-let selected = 2
+let selected = 0
 
 
-let loadedW = false
-let duck = false
+
+
 let scaleMutiply = 2.3
 
 function setupWebcam() {
@@ -62,7 +62,7 @@ function setupWebcam() {
           webcamElement.addEventListener('loadeddata', () => {
 
             resolve()
-            loadedW = true
+
 
            faceFilter.init({
              canvasId: 'webcamCanvas',
@@ -137,7 +137,7 @@ document.querySelector('#change').addEventListener('click', (e) => {
   }
   else if(selected === shaderArr.length-1){
     selected ++
-    duck = true
+
     // mask = sceneGroup
     scene.remove(maskM)
     scene.add(sceneGroup)
@@ -146,12 +146,12 @@ document.querySelector('#change').addEventListener('click', (e) => {
   }
   else{
     selected = 0
-    duck = true
+
     // mask = sceneGroup
     scene.remove(sceneGroup)
 
     maskM = mask
-      scene.add(maskM)
+    scene.add(maskM)
     scaleMutiply = 2.6
   }
   maskMaterial.needsUpdate = true

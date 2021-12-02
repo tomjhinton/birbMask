@@ -5,7 +5,12 @@ import {Pane} from 'tweakpane';
 import { gsap } from 'gsap'
 import * as tf from '@tensorflow/tfjs';
 import vertexShader from './shaders/vert.glsl'
+
 import fragmentShader1 from './shaders/frag1.glsl'
+
+
+import fragmentShader2 from './shaders/frag2.glsl'
+
 
 
 import fragmentShader from './shaders/frag.glsl'
@@ -36,8 +41,8 @@ const webcamElement = document.getElementById('webcam')
 
 const webcamCanvas = document.getElementById('webcamCanvas')
 
-let shaderArr = [fragmentShader, fragmentShader1]
-let selected = 0
+let shaderArr = [fragmentShader, fragmentShader1, fragmentShader2]
+let selected = 2
 
 
 let loadedW = false
@@ -350,11 +355,11 @@ const pal = (
   a = [0.5, 0.5, 0.5],
   b = [0.5, 0.5, 0.5],
   c = [1.0, 1.0, 1.0],
-  d = [0.00, 0.10, 0.20]
+  d = [0.00, 0.33, 0.67]
 ) => c.map(
   (cc, i) =>
     Math.cos(
-      cc * t + d[i] * 6.28318
+      cc * t + d[i] * 6.28318 * maskMaterial.uniforms.uD.value
     ) * b[i] + a[i]
 );
 
@@ -368,7 +373,7 @@ function draw() {
   ).map(e => e * 255).join(',')})`).join(',');
   document.getElementById('body').style.background = `linear-gradient(${c})`;
 
-  const d = new Array(100).fill().map((_,i) => `rgb(${pal(
+  const d = new Array(30 ).fill().map((_,i) => `rgb(${pal(
     ((i + t) / 100) * (Math.PI * 2),
     settings[1], settings[0], settings[3], settings[2]
   ).map(e => e * 255).join(',')})`).join(',');

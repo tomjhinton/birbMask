@@ -1,0 +1,79 @@
+@font-face {
+  font-family: Art;
+  src: url('../static/ArtDystopia.otf');
+}
+
+*{
+  box-sizing: border-box;
+
+}
+
+#webcam{
+  // position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: -2;
+  border-radius: 100%;
+  border: 25px solid black;
+  // visibility: hidden;
+  background: white;
+
+}
+
+#webcamCanvas{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  border-radius: 100%;
+  display: none;
+
+}
+
+
+.webgl{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.title{
+  font-size: 6em;
+  font-family: Art;
+  position: absolute;
+  color: rgba(255,255,255,1);
+  // pointer-events: none;
+  top: 5%;
+  left: 3%;
+  // justify-content: center;
+  width: 40%;
+  height: 20px;
+  z-index: 1;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+
+}
+
+.tp-dfwv{
+  margin-top: auto;
+  top: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+
+	}
+
+	50% {
+		transform: scale(1);
+
+	}
+
+	100% {
+		transform: scale(0.95);
+
+	}
+}

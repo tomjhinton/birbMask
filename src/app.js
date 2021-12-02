@@ -33,9 +33,7 @@ const neuralNetworkModel = require('./NN_DEFAULT.json')
 
 
 
-console.log(faceFilter)
 
-console.log(JeelizThreeHelper)
 
 const webcamElement = document.getElementById('webcam')
 
@@ -130,8 +128,8 @@ const maskMaterial  = new THREE.ShaderMaterial({
   side: THREE.DoubleSide
 })
 
-document.querySelector('#change').addEventListener('click', (e) => {
-  console.log(selected)
+
+function change(){
   if(selected < shaderArr.length-1){
     selected ++
   }
@@ -151,13 +149,24 @@ document.querySelector('#change').addEventListener('click', (e) => {
     scene.remove(sceneGroup)
 
     maskM = mask
-    scene.add(maskM)
+      scene.add(maskM)
     scaleMutiply = 2.6
   }
   maskMaterial.needsUpdate = true
   maskMaterial.fragmentShader = shaderArr[selected]
+}
+
+
+document.querySelector('#change').addEventListener('click', (e) => {
+  change()
 
 })
+
+document.querySelector('#change2').addEventListener('click', (e) => {
+  change()
+
+})
+
 
 
 
@@ -320,15 +329,6 @@ const tick = () =>{
   // Update controls
   // controls.update()
   maskMaterial.needsUpdate = true
-  // if(predictions && predictions[0].landmarks[2]){
-  //   mask.position.x = (predictions[0].landmarks[2][0]/ window.innerWidth) * 2 - 1
-  //
-  //   mask.position.y = - (predictions[0].landmarks[2][1]/ window.innerHeight) * 2 + 1
-  // }
-
-  // riverMaterial.fragmentShader = fragArray[riverSelected]
-
-
 
 
   // Render
@@ -383,4 +383,4 @@ function draw() {
   requestAnimationFrame(draw)
 }
 
-draw();
+draw()

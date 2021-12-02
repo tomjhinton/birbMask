@@ -44,17 +44,35 @@
   position: absolute;
   color: rgba(255,255,255,1);
   // pointer-events: none;
-  top: 5%;
+  top: 14%;
   left: 3%;
   // justify-content: center;
-  width: 40%;
   height: 20px;
   z-index: 1;
   cursor: pointer;
   animation: pulse 2s infinite;
-  
+
 
 }
+
+.title2{
+  font-size: 6em;
+  font-family: Art;
+  position: absolute;
+  color: rgba(255,255,255,1);
+  // pointer-events: none;
+  top: 14%;
+  left: 85%;
+  // justify-content: center;
+
+  height: 20px;
+  z-index: 1;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+
+
+}
+
 
 .tp-dfwv{
   margin-top: auto;

@@ -64,7 +64,7 @@ function setupWebcam() {
 
               },
               callbackTrack: function(detectState){
-                console.log
+                
                 maskM.position.x = detectState.x
                 maskM.position.y = detectState.y
 

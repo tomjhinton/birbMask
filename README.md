@@ -21,7 +21,7 @@ Got it working in the end!
 
 Side note.
 - One of the topics that was almost picked this week was "Ducks with no legs."
-- While the voting going on I knocked out a very quick duck with tentacles in Blender.
+- While the voting was going on I knocked out a very quick duck with tentacles in Blender.
 - Tentaduck is included here for absolutely no reason other than I had him.
 
 
@@ -31,4 +31,4 @@ Now because I had made somewhat shoddy masks styling it well would've looked sil
 
 
 [Meodai's take on Inigo Quilez Gradients](https://codepen.io/meodai/pen/MWEYqEb?editors=0010)
-- Used this badly for my background, you should have a look though, can definitely be used well. 
+- Used this badly for my background, you should have a look though, can definitely be used well.

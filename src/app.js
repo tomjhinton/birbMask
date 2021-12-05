@@ -64,14 +64,17 @@ function setupWebcam() {
 
               },
               callbackTrack: function(detectState){
+                console.log
                 maskM.position.x = detectState.x
                 maskM.position.y = detectState.y
 
                 maskM.rotation.x = detectState.rx
                 maskM.rotation.y = detectState.ry
                 maskM.rotation.z = detectState.rz
+                if((detectState.detected > .2)){
 
                 maskM.scale.set(  detectState.s * scaleMutiply,  detectState.s * scaleMutiply,  detectState.s * scaleMutiply)
+              }
 
               // Render your scene here
               // [... do something with detectState]
@@ -128,7 +131,7 @@ function change(){
     scene.remove(sceneGroup)
     maskM = mask
     scene.add(maskM)
-    scaleMutiply = 2.6
+    scaleMutiply = 0.6
   }
   maskMaterial.needsUpdate = true
   maskMaterial.fragmentShader = shaderArr[selected]
